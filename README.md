@@ -14,8 +14,8 @@ Cada carpeta contiene un archivo `ejemplo.txt` que puede utilizarse para probar 
 Para ejecutar el programa, asegúrese de tener configurado correctamente el entorno antlr4 con el lenguaje objetivo Python, estar en la carpeta correspondiente al punto y luego ejecute los siguientes comandos:
 
 ```bash
-antlr4 -Dlanguage=Python3 NombreArchivo.g4 -visitor -o
-python3 Main.py ejemplos.txt
+antlr4 -Dlanguage=Python3 -visitor NombreArchivo.g4 
+python3 Main.py ejemplos.txt   # o ejemplo.txt según corresponda
 ```
 IMPORTANTE:
 
@@ -25,13 +25,13 @@ Reemplace `NombreArchivo.g4` con el nombre del archivo de gramática específico
 
 Recomendaciones Punto #1: El programa maneja los numeros imaginarios como: los numeros enteros seguidos de un operador de suma o resta seguido de un numero entero acompañado de una 'i'. O directamente como un numero entero seguido de una 'i'. Se pueden manejar operaciones con imaginarios de suma, resta, multipliación y división, al igual que expresiones con parentesis.
 
-* Para el Punto #2. el archivo .g4 se llama:
+* Para el Punto #2. el archivo .g4 se llama: `PythonFunction.g4`
 
-Recomendaciones Punto #2:
+Recomendaciones Punto #2: Hasta este momento solo recibe iterables (listas, tuplas y sets) y strings.
 
-* Para el punto #3. el archivo .g4 se llama:
+* Para el punto #3. el archivo .g4 se llama: `FourierTransform.g4`
 
-Recomendaciones Punto #2:
+Recomendaciones Punto #3: Hasta este momento solo transforma Delta de Dirac y Sumatorias
 
 Todos las carpetas tienen llamado el archivo principal que ejecuta todo como `Main.py`
 

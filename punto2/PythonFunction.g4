@@ -2,57 +2,67 @@ grammar PythonFunction;
 
 prog:   stat+ ;
 
-stat:  function_declaration NEWLINE (iterable_declaration)* 'map' '('  function_name (',' iterable_name)* ')'
+stat: iterable_declaration NEWLINE  # print_stat
+    | ID '=' expr NEWLINE         # assign
+    ;
+filter: 'filter' '(' condition ',' IDENTIFIER ')';
+
+condition: expr op=('=='|'>'|'<'|'!='|'>='|'<=') expr;
+
+expr:   expr op=('*'|'/') expr      # MulDiv
+    |   expr op=('+'|'-') expr      # AddSub
+    |   trigFunc                    # TrigFunction
+    |   '|' expr '|'		    # Abs
+    |   INT                         # int
+    |   ID                          # id
+    |   HEX			    # hex
+    |   '(' expr ')'                # parens
     ;
 
-function_declaration : 'def' function_name '(' parameter_list ')' ':' NEWLINE function_body;
+trigFunc : 'cos' expr               # CosFunc
+         | 'sen' expr               # SenFunc
+         | 'tan' expr		    # TanFunc
+         ;
 
-function_name : IDENTIFIER;
-
-parameter_list : parameter (',' parameter)*;
-
-parameter : IDENTIFIER;
-
-function_body : statement_block;
-
-statement_block : INDENT statements;
-
-statements : statement (NEWLINE statement)*;
-
-statement : expression_statement ;
-
-expression_statement : expression;
+iterable_declaration : IDENTIFIER '=' iterable_expression  # creacion_iterable
+                    ;           
 
 
-expression :  LITERAL 
-        | expression '+' expression 
-        | expression '-' expression
-        | expression '*' expression 
-        | expression '/' expression;
+iterable_expression : list_expression  # list
+                    | tuple_expression # tuple
+                    | string_expression # string
+                    | set_expression # set
+                    ;
 
-iterable_declaration : iterable_name '=' iterable_expression;
+list_expression : '[' LITERAL (',' LITERAL)* ']' # accion_list
+                | '[]'                           # empty_list
+                ;  
+
+tuple_expression : '(' LITERAL (',' LITERAL)* ')' # accion_tuple
+                |'()'                             # empty_tuple
+                ;
+
+string_expression : STRING_LITERAL               # accion_string
+                ;
+
+set_expression : '{' LITERAL (',' LITERAL)* '}'  # accion_set
+                |'{}'                            # empty_set
+                ;
 
 
-iterable_name : IDENTIFIER;
-
-iterable_expression : list_expression 
-                    | tuple_expression 
-                    | string_expression 
-                    | set_expression;
-
-list_expression : '[' expression_list? ']';
-
-tuple_expression : '(' expression_list? ')';
-
-string_expression : STRING_LITERAL;
-
-set_expression : '{' expression_list? '}';
-
-expression_list : LITERAL (',' LITERAL)*;
 
 
 IDENTIFIER : [a-zA-Z_][a-zA-Z0-9_]*;
-STRING_LITERAL : '"' ~["]* '"';
+STRING_LITERAL : ('"' ~["]* '"' | '\'' ~[']* '\'');
 LITERAL : [0-9]+ ;
 NEWLINE : '\r'? '\n';
+MUL :   '*' ; // assigns token name to '*' used above in grammar
+DIV :   '/' ;
+ADD :   '+' ;
+SUB :   '-' ;
+TAN :   'tan' ;
+ID  :   [a-zA-Z]+ ;      // match identifiers
+INT :   [0-9]+ ;         // match integers
+HEX :   '0x' [a-fA-F0-9]+ ; //lo devuelve como num decimal
+WS  :   [ \t]+ -> skip ; // toss out whitespace
 INDENT : '    ';

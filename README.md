@@ -27,7 +27,7 @@ Recomendaciones Punto #1: El programa maneja los numeros imaginarios como: los n
 
 * Para el Punto #2. el archivo .g4 se llama: `PythonFunction.g4`
 
-Recomendaciones Punto #2: Hasta este momento solo recibe iterables (listas, tuplas y sets) y strings.
+Recomendaciones Punto #2: Hasta este momento solo recibe iterables (listas, tuplas y sets, que solo contienen numeros) y strings.
 
 * Para el punto #3. el archivo .g4 se llama: `FourierTransform.g4`
 

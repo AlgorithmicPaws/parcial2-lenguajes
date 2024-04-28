@@ -1,0 +1,3 @@
+dirac(t)
+cos(3 t)
+

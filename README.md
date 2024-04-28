@@ -21,11 +21,17 @@ IMPORTANTE:
 
 Reemplace `NombreArchivo.g4` con el nombre del archivo de gramática específico que desea ejecutar, y `ejemplos.txt` con el nombre del archivo de entrada que desea utilizar, o déjelo en blanco para abrir la entrada por consola.
 
-* Para el Punto #1. el archivo .g4 se llama:
+* Para el Punto #1. el archivo .g4 se llama: `ComplexLanguage.g4`
+
+Recomendaciones Punto #1: El programa maneja los numeros imaginarios como: los numeros enteros seguidos de un operador de suma o resta seguido de un numero entero acompañado de una 'i'. O directamente como un numero entero seguido de una 'i'. Se pueden manejar operaciones con imaginarios de suma, resta, multipliación y división, al igual que expresiones con parentesis.
 
 * Para el Punto #2. el archivo .g4 se llama:
 
+Recomendaciones Punto #2:
+
 * Para el punto #3. el archivo .g4 se llama:
+
+Recomendaciones Punto #2:
 
 Todos las carpetas tienen llamado el archivo principal que ejecuta todo como `Main.py`
 

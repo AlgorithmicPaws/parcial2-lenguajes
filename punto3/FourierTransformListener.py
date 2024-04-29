@@ -98,15 +98,6 @@ class FourierTransformListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by FourierTransformParser#blanked.
-    def enterBlanked(self, ctx:FourierTransformParser.BlankedContext):
-        pass
-
-    # Exit a parse tree produced by FourierTransformParser#blanked.
-    def exitBlanked(self, ctx:FourierTransformParser.BlankedContext):
-        pass
-
-
     # Enter a parse tree produced by FourierTransformParser#condicion.
     def enterCondicion(self, ctx:FourierTransformParser.CondicionContext):
         pass
@@ -131,6 +122,42 @@ class FourierTransformListener(ParseTreeListener):
 
     # Exit a parse tree produced by FourierTransformParser#SinFunc.
     def exitSinFunc(self, ctx:FourierTransformParser.SinFuncContext):
+        pass
+
+
+    # Enter a parse tree produced by FourierTransformParser#ints.
+    def enterInts(self, ctx:FourierTransformParser.IntsContext):
+        pass
+
+    # Exit a parse tree produced by FourierTransformParser#ints.
+    def exitInts(self, ctx:FourierTransformParser.IntsContext):
+        pass
+
+
+    # Enter a parse tree produced by FourierTransformParser#longP.
+    def enterLongP(self, ctx:FourierTransformParser.LongPContext):
+        pass
+
+    # Exit a parse tree produced by FourierTransformParser#longP.
+    def exitLongP(self, ctx:FourierTransformParser.LongPContext):
+        pass
+
+
+    # Enter a parse tree produced by FourierTransformParser#integer.
+    def enterInteger(self, ctx:FourierTransformParser.IntegerContext):
+        pass
+
+    # Exit a parse tree produced by FourierTransformParser#integer.
+    def exitInteger(self, ctx:FourierTransformParser.IntegerContext):
+        pass
+
+
+    # Enter a parse tree produced by FourierTransformParser#frecuency.
+    def enterFrecuency(self, ctx:FourierTransformParser.FrecuencyContext):
+        pass
+
+    # Exit a parse tree produced by FourierTransformParser#frecuency.
+    def exitFrecuency(self, ctx:FourierTransformParser.FrecuencyContext):
         pass
 
 

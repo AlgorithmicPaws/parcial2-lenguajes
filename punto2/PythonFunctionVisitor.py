@@ -14,6 +14,11 @@ class PythonFunctionVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by PythonFunctionParser#creacion_function_fillter.
+    def visitCreacion_function_fillter(self, ctx:PythonFunctionParser.Creacion_function_fillterContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by PythonFunctionParser#print_stat.
     def visitPrint_stat(self, ctx:PythonFunctionParser.Print_statContext):
         return self.visitChildren(ctx)
@@ -24,13 +29,33 @@ class PythonFunctionVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonFunctionParser#filter.
-    def visitFilter(self, ctx:PythonFunctionParser.FilterContext):
+    # Visit a parse tree produced by PythonFunctionParser#assign_filter.
+    def visitAssign_filter(self, ctx:PythonFunctionParser.Assign_filterContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonFunctionParser#condition.
-    def visitCondition(self, ctx:PythonFunctionParser.ConditionContext):
+    # Visit a parse tree produced by PythonFunctionParser#def.
+    def visitDef(self, ctx:PythonFunctionParser.DefContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonFunctionParser#execute_filter.
+    def visitExecute_filter(self, ctx:PythonFunctionParser.Execute_filterContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonFunctionParser#always_condition.
+    def visitAlways_condition(self, ctx:PythonFunctionParser.Always_conditionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonFunctionParser#parameter_condition.
+    def visitParameter_condition(self, ctx:PythonFunctionParser.Parameter_conditionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonFunctionParser#condition_parameter.
+    def visitCondition_parameter(self, ctx:PythonFunctionParser.Condition_parameterContext):
         return self.visitChildren(ctx)
 
 
@@ -104,11 +129,6 @@ class PythonFunctionVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonFunctionParser#string.
-    def visitString(self, ctx:PythonFunctionParser.StringContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by PythonFunctionParser#set.
     def visitSet(self, ctx:PythonFunctionParser.SetContext):
         return self.visitChildren(ctx)
@@ -131,11 +151,6 @@ class PythonFunctionVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by PythonFunctionParser#empty_tuple.
     def visitEmpty_tuple(self, ctx:PythonFunctionParser.Empty_tupleContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by PythonFunctionParser#accion_string.
-    def visitAccion_string(self, ctx:PythonFunctionParser.Accion_stringContext):
         return self.visitChildren(ctx)
 
 

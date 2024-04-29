@@ -59,11 +59,6 @@ class FourierTransformVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by FourierTransformParser#blanked.
-    def visitBlanked(self, ctx:FourierTransformParser.BlankedContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by FourierTransformParser#condicion.
     def visitCondicion(self, ctx:FourierTransformParser.CondicionContext):
         return self.visitChildren(ctx)
@@ -76,6 +71,26 @@ class FourierTransformVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by FourierTransformParser#SinFunc.
     def visitSinFunc(self, ctx:FourierTransformParser.SinFuncContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by FourierTransformParser#ints.
+    def visitInts(self, ctx:FourierTransformParser.IntsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by FourierTransformParser#longP.
+    def visitLongP(self, ctx:FourierTransformParser.LongPContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by FourierTransformParser#integer.
+    def visitInteger(self, ctx:FourierTransformParser.IntegerContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by FourierTransformParser#frecuency.
+    def visitFrecuency(self, ctx:FourierTransformParser.FrecuencyContext):
         return self.visitChildren(ctx)
 
 

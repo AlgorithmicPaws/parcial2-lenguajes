@@ -2,17 +2,26 @@ grammar PythonFunction;
 
 prog:   stat+ ;
 
-stat: iterable_declaration NEWLINE  # print_stat
+stat: function_declaration_filter NEWLINE # creacion_function_fillter
+    | iterable_declaration NEWLINE  # print_stat
     | ID '=' expr NEWLINE         # assign
+    | IDENTIFIER '=' filter NEWLINE    #assign_filter          
     ;
-filter: 'filter' '(' condition ',' IDENTIFIER ')';
+function_declaration_filter: 'def' IDENTIFIER '('IDENTIFIER'):' NEWLINE INDENT 'return' condition # def
+;
 
-condition: expr op=('=='|'>'|'<'|'!='|'>='|'<=') expr;
+filter: 'filter' '(' IDENTIFIER ',' IDENTIFIER ')'     # execute_filter
+        ;
+
+condition: expr op=('=='|'>'|'<'|'!='|'>='|'<=') expr      # always_condition
+        |IDENTIFIER op=('=='|'>'|'<'|'!='|'>='|'<=') expr   # parameter_condition
+        |expr op=('=='|'>'|'<'|'!='|'>='|'<=') IDENTIFIER   # condition_parameter
+        ;
 
 expr:   expr op=('*'|'/') expr      # MulDiv
     |   expr op=('+'|'-') expr      # AddSub
     |   trigFunc                    # TrigFunction
-    |   '|' expr '|'		    # Abs
+    |   '|' expr '|'		        # Abs
     |   INT                         # int
     |   ID                          # id
     |   HEX			    # hex
@@ -30,39 +39,38 @@ iterable_declaration : IDENTIFIER '=' iterable_expression  # creacion_iterable
 
 iterable_expression : list_expression  # list
                     | tuple_expression # tuple
-                    | string_expression # string
                     | set_expression # set
                     ;
 
-list_expression : '[' LITERAL (',' LITERAL)* ']' # accion_list
+list_expression : '[' INT (',' INT)* ']' # accion_list
                 | '[]'                           # empty_list
                 ;  
 
-tuple_expression : '(' LITERAL (',' LITERAL)* ')' # accion_tuple
+tuple_expression : '(' INT (',' INT)* ')' # accion_tuple
                 |'()'                             # empty_tuple
                 ;
 
-string_expression : STRING_LITERAL               # accion_string
-                ;
-
-set_expression : '{' LITERAL (',' LITERAL)* '}'  # accion_set
+set_expression : '{' INT (',' INT)* '}'  # accion_set
                 |'{}'                            # empty_set
                 ;
 
 
 
-
+INDENT : '    ';
 IDENTIFIER : [a-zA-Z_][a-zA-Z0-9_]*;
-STRING_LITERAL : ('"' ~["]* '"' | '\'' ~[']* '\'');
-LITERAL : [0-9]+ ;
 NEWLINE : '\r'? '\n';
 MUL :   '*' ; // assigns token name to '*' used above in grammar
 DIV :   '/' ;
 ADD :   '+' ;
 SUB :   '-' ;
+IGUAL :   '==' ;
+NOIGUAL :   '!=' ;
+MAYOR :   '>' ;
+MENOR :   '<' ;
+MAYORIGUAL :   '>=' ;
+MENORIGUAL :   '<=' ;
 TAN :   'tan' ;
 ID  :   [a-zA-Z]+ ;      // match identifiers
 INT :   [0-9]+ ;         // match integers
 HEX :   '0x' [a-fA-F0-9]+ ; //lo devuelve como num decimal
 WS  :   [ \t]+ -> skip ; // toss out whitespace
-INDENT : '    ';

@@ -17,6 +17,15 @@ class PythonFunctionListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by PythonFunctionParser#creacion_function_fillter.
+    def enterCreacion_function_fillter(self, ctx:PythonFunctionParser.Creacion_function_fillterContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#creacion_function_fillter.
+    def exitCreacion_function_fillter(self, ctx:PythonFunctionParser.Creacion_function_fillterContext):
+        pass
+
+
     # Enter a parse tree produced by PythonFunctionParser#print_stat.
     def enterPrint_stat(self, ctx:PythonFunctionParser.Print_statContext):
         pass
@@ -35,21 +44,57 @@ class PythonFunctionListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PythonFunctionParser#filter.
-    def enterFilter(self, ctx:PythonFunctionParser.FilterContext):
+    # Enter a parse tree produced by PythonFunctionParser#assign_filter.
+    def enterAssign_filter(self, ctx:PythonFunctionParser.Assign_filterContext):
         pass
 
-    # Exit a parse tree produced by PythonFunctionParser#filter.
-    def exitFilter(self, ctx:PythonFunctionParser.FilterContext):
+    # Exit a parse tree produced by PythonFunctionParser#assign_filter.
+    def exitAssign_filter(self, ctx:PythonFunctionParser.Assign_filterContext):
         pass
 
 
-    # Enter a parse tree produced by PythonFunctionParser#condition.
-    def enterCondition(self, ctx:PythonFunctionParser.ConditionContext):
+    # Enter a parse tree produced by PythonFunctionParser#def.
+    def enterDef(self, ctx:PythonFunctionParser.DefContext):
         pass
 
-    # Exit a parse tree produced by PythonFunctionParser#condition.
-    def exitCondition(self, ctx:PythonFunctionParser.ConditionContext):
+    # Exit a parse tree produced by PythonFunctionParser#def.
+    def exitDef(self, ctx:PythonFunctionParser.DefContext):
+        pass
+
+
+    # Enter a parse tree produced by PythonFunctionParser#execute_filter.
+    def enterExecute_filter(self, ctx:PythonFunctionParser.Execute_filterContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#execute_filter.
+    def exitExecute_filter(self, ctx:PythonFunctionParser.Execute_filterContext):
+        pass
+
+
+    # Enter a parse tree produced by PythonFunctionParser#always_condition.
+    def enterAlways_condition(self, ctx:PythonFunctionParser.Always_conditionContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#always_condition.
+    def exitAlways_condition(self, ctx:PythonFunctionParser.Always_conditionContext):
+        pass
+
+
+    # Enter a parse tree produced by PythonFunctionParser#parameter_condition.
+    def enterParameter_condition(self, ctx:PythonFunctionParser.Parameter_conditionContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#parameter_condition.
+    def exitParameter_condition(self, ctx:PythonFunctionParser.Parameter_conditionContext):
+        pass
+
+
+    # Enter a parse tree produced by PythonFunctionParser#condition_parameter.
+    def enterCondition_parameter(self, ctx:PythonFunctionParser.Condition_parameterContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#condition_parameter.
+    def exitCondition_parameter(self, ctx:PythonFunctionParser.Condition_parameterContext):
         pass
 
 
@@ -179,15 +224,6 @@ class PythonFunctionListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PythonFunctionParser#string.
-    def enterString(self, ctx:PythonFunctionParser.StringContext):
-        pass
-
-    # Exit a parse tree produced by PythonFunctionParser#string.
-    def exitString(self, ctx:PythonFunctionParser.StringContext):
-        pass
-
-
     # Enter a parse tree produced by PythonFunctionParser#set.
     def enterSet(self, ctx:PythonFunctionParser.SetContext):
         pass
@@ -230,15 +266,6 @@ class PythonFunctionListener(ParseTreeListener):
 
     # Exit a parse tree produced by PythonFunctionParser#empty_tuple.
     def exitEmpty_tuple(self, ctx:PythonFunctionParser.Empty_tupleContext):
-        pass
-
-
-    # Enter a parse tree produced by PythonFunctionParser#accion_string.
-    def enterAccion_string(self, ctx:PythonFunctionParser.Accion_stringContext):
-        pass
-
-    # Exit a parse tree produced by PythonFunctionParser#accion_string.
-    def exitAccion_string(self, ctx:PythonFunctionParser.Accion_stringContext):
         pass
 
 

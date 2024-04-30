@@ -5,7 +5,7 @@ numbers4 = (4, 5, 6)
 numbers5 = {}
 numbers6 = {4, 5, 6}
 def por2 (a):
-    return a * 2
+    return 2 * a
 lista_aumentada = map(por2,numbers2)
 def solo5 (elemento):
     return  5 == elemento

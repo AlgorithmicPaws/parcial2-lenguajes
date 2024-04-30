@@ -204,7 +204,7 @@ class EvalVisitor(PythonFunctionVisitor):
         left = self.visit(ctx.expr())
         if ctx.op.type == PythonFunctionParser.ADD:
             operator = '+'
-        elif ctx.op.type == PythonFunctionParser.SUM:
+        elif ctx.op.type == PythonFunctionParser.SUB:
             operator = '-'
         elif ctx.op.type == PythonFunctionParser.MUL:
             operator = '*'

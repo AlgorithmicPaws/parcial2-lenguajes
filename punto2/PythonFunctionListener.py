@@ -53,6 +53,24 @@ class PythonFunctionListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by PythonFunctionParser#assign_map.
+    def enterAssign_map(self, ctx:PythonFunctionParser.Assign_mapContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#assign_map.
+    def exitAssign_map(self, ctx:PythonFunctionParser.Assign_mapContext):
+        pass
+
+
+    # Enter a parse tree produced by PythonFunctionParser#def_map.
+    def enterDef_map(self, ctx:PythonFunctionParser.Def_mapContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#def_map.
+    def exitDef_map(self, ctx:PythonFunctionParser.Def_mapContext):
+        pass
+
+
     # Enter a parse tree produced by PythonFunctionParser#def.
     def enterDef(self, ctx:PythonFunctionParser.DefContext):
         pass
@@ -68,6 +86,33 @@ class PythonFunctionListener(ParseTreeListener):
 
     # Exit a parse tree produced by PythonFunctionParser#execute_filter.
     def exitExecute_filter(self, ctx:PythonFunctionParser.Execute_filterContext):
+        pass
+
+
+    # Enter a parse tree produced by PythonFunctionParser#execute_map.
+    def enterExecute_map(self, ctx:PythonFunctionParser.Execute_mapContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#execute_map.
+    def exitExecute_map(self, ctx:PythonFunctionParser.Execute_mapContext):
+        pass
+
+
+    # Enter a parse tree produced by PythonFunctionParser#left_operation.
+    def enterLeft_operation(self, ctx:PythonFunctionParser.Left_operationContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#left_operation.
+    def exitLeft_operation(self, ctx:PythonFunctionParser.Left_operationContext):
+        pass
+
+
+    # Enter a parse tree produced by PythonFunctionParser#right_operation.
+    def enterRight_operation(self, ctx:PythonFunctionParser.Right_operationContext):
+        pass
+
+    # Exit a parse tree produced by PythonFunctionParser#right_operation.
+    def exitRight_operation(self, ctx:PythonFunctionParser.Right_operationContext):
         pass
 
 

@@ -5,7 +5,7 @@ import math
 class EvalVisitor(PythonFunctionVisitor):
     memory_iterables = {}
     memory_iterables_funtion = {}
-    memory_parametro = {}
+    memory_parametro_iterable = {}    
 
     def visitPrint_stat(self, ctx:PythonFunctionParser.StatContext):
         value = self.visit(ctx.iterable_declaration())
@@ -23,14 +23,10 @@ class EvalVisitor(PythonFunctionVisitor):
     # Visit a parse tree produced by PythonFunctionParser#list.
     def visitList(self, ctx:PythonFunctionParser.ListContext):
         return self.visit(ctx.list_expression())
-
-
     # Visit a parse tree produced by PythonFunctionParser#tuple.
     def visitTuple(self, ctx:PythonFunctionParser.TupleContext):
         return self.visit(ctx.tuple_expression())
-
-
-
+    
     # Visit a parse tree produced by PythonFunctionParser#set.
     def visitSet(self, ctx:PythonFunctionParser.SetContext):
         return self.visit(ctx.set_expression())
@@ -76,6 +72,146 @@ class EvalVisitor(PythonFunctionVisitor):
     # Visit a parse tree produced by PythonFunctionParser#empty_set.
     def visitEmpty_set(self, ctx:PythonFunctionParser.Empty_setContext):
         return set({})
+        # Visit a parse tree produced by PythonFunctionParser#assign_map.
+    def visitAssign_map(self, ctx:PythonFunctionParser.Assign_mapContext):
+        value = self.visit(ctx.map_())
+        print(value)
+        return 0
+    # Visit a parse tree produced by PythonFunctionParser#def_map.
+    def visitDef_map(self, ctx:PythonFunctionParser.Def_mapContext):
+        print(ctx.getText())
+        id_ = ctx.IDENTIFIER(0).getText()
+        self.memory_parametro_iterable[id_] = ctx.IDENTIFIER(1).getText()
+        global id_actual_map 
+        id_actual_map = ctx.IDENTIFIER(0).getText()
+        value = self.visit(ctx.operation())
+        self.memory_iterables_funtion[id_] = value 
+        return value
+
+
+        # Visit a parse tree produced by PythonFunctionParser#execute_map.
+    def visitExecute_map(self, ctx:PythonFunctionParser.Execute_mapContext):
+        print(ctx.getText())
+        if ctx.IDENTIFIER(1).getText() in self.memory_iterables:
+
+            iterable = self.memory_iterables[ctx.IDENTIFIER(1).getText()] 
+        else:
+            return 0
+        if ctx.IDENTIFIER(0).getText() in self.memory_iterables_funtion:
+            operation = self.memory_iterables_funtion[ctx.IDENTIFIER(0).getText()] 
+        else:
+            return 0
+        iterable_type = type(iterable)
+        if iterable_type == list:
+            iterable_mapped = []
+            for elemento in iterable:
+                for i in range(len(operation)):
+                    if operation[i] == self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]:
+                        operation[i] = elemento 
+                        pos_parametro = i
+                        parametro = True 
+                    elif operation[i] in ['+','-','*','/']:
+                        if operation[i] == '+':
+                            iterable_mapped.append(operation[0] + operation[1])
+                        if operation[i] == '-':
+                            iterable_mapped.append(operation[0] - operation[1])
+                        if operation[i] == '*':
+                            iterable_mapped.append(operation[0] * operation[1])
+                        if operation[i] == '/':
+                            if operation[1] != 0:
+                                iterable_mapped.append(operation[0] / operation[1])
+                            else:
+                                print("Error: División por cero")
+                                return 0
+                if parametro:
+                    operation[pos_parametro] = self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]
+        if iterable_type == tuple:
+            iterable_mapped = ()
+            for elemento in iterable:
+                for i in range(len(operation)):
+                    if operation[i] == self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]:
+                        operation[i] = elemento 
+                        pos_parametro = i
+                        parametro = True 
+                    elif operation[i] in ['+','-','*','/']:
+                        if operation[i] == '+':
+                            iterable_mapped += (operation[0] + operation[1] ,)
+                        if operation[i] == '-':
+                            iterable_mapped += (operation[0] - operation[1] ,)
+                        if operation[i] == '*':
+                            iterable_mapped += (operation[0] * operation[1] ,)
+                        if operation[i] == '/':
+                            if operation[1] != 0:
+                                iterable_mapped += (operation[0] / operation[1] ,)
+                            else:
+                                print("Error: División por cero")
+                                return 0
+                    else:
+                        parametro = False 
+                if parametro:
+                    operation[pos_parametro] = self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]
+        if iterable_type == set:
+            iterable_mapped = set()
+            for elemento in iterable:
+                for i in range(len(operation)):
+                    if operation[i] == self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]:
+                        operation[i] = elemento 
+                        pos_parametro = i
+                        parametro = True 
+                    elif operation[i] in ['+','-','*','/']:
+                        if operation[i] == '+':
+                            iterable_mapped.add(operation[0] + operation[1])
+                        if operation[i] == '-':
+                            iterable_mapped.add(operation[0] - operation[1])
+                        if operation[i] == '*':
+                            iterable_mapped.add(operation[0] * operation[1])
+                        if operation[i] == '/':
+                            if operation[1] != 0:
+                                iterable_mapped.add(operation[0] / operation[1])
+                            else:
+                                print("Error: División por cero")
+                                return 0
+                if parametro:
+                    operation[pos_parametro] =  self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]
+        return iterable_mapped
+
+
+
+    # Visit a parse tree produced by PythonFunctionParser#left_operation.
+    def visitLeft_operation(self, ctx:PythonFunctionParser.Left_operationContext):
+        if self.memory_parametro_iterable[id_actual_map] == ctx.IDENTIFIER().getText():
+            left = ctx.IDENTIFIER().getText()
+        else:
+            return 0
+        right = self.visit(ctx.expr())
+        if ctx.op.type == PythonFunctionParser.ADD:
+            operator = '+'
+        elif ctx.op.type == PythonFunctionParser.SUB:
+            operator = '-'
+        elif ctx.op.type == PythonFunctionParser.MUL:
+            operator = '*'
+        elif ctx.op.type == PythonFunctionParser.DIV:
+            operator = '/'
+        return [left, right, operator ]
+
+
+    # Visit a parse tree produced by PythonFunctionParser#right_operation.
+    def visitRight_operation(self, ctx:PythonFunctionParser.Right_operationContext):
+        if self.memory_parametro_iterable[id_actual_map] == ctx.IDENTIFIER().getText():
+            right = ctx.IDENTIFIER().getText()
+        else:
+            return 0
+        left = self.visit(ctx.expr())
+        if ctx.op.type == PythonFunctionParser.ADD:
+            operator = '+'
+        elif ctx.op.type == PythonFunctionParser.SUM:
+            operator = '-'
+        elif ctx.op.type == PythonFunctionParser.MUL:
+            operator = '*'
+        elif ctx.op.type == PythonFunctionParser.DIV:
+            operator = '/'
+        return [left, right, operator ]
+
     
     def visitAssign_filter(self, ctx:PythonFunctionParser.Assign_filterContext):
         value = self.visit(ctx.filter_())
@@ -117,7 +253,7 @@ class EvalVisitor(PythonFunctionVisitor):
             iterable_filtered = []
             for elemento in iterable:
                 for i in range(len(condition)):
-                    if condition[i] == self.memory_parametro[ctx.IDENTIFIER(0).getText()]:
+                    if condition[i] == self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]:
                         condition[i] = elemento 
                         pos_parametro = i
                         parametro = True 
@@ -126,13 +262,13 @@ class EvalVisitor(PythonFunctionVisitor):
                     else:
                         parametro = False 
                 if parametro:
-                    condition[pos_parametro] = self.memory_parametro[ctx.IDENTIFIER(0).getText()]
+                    condition[pos_parametro] = self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]
         elif iterable_type == tuple:
 
             iterable_filtered = ()
             for elemento in iterable:
                 for i in range(len(condition)):
-                    if condition[i] == self.memory_parametro[ctx.IDENTIFIER(0).getText()]:
+                    if condition[i] == self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]:
                         condition[i] = elemento 
                         pos_parametro = i
                         parametro = True 
@@ -158,12 +294,12 @@ class EvalVisitor(PythonFunctionVisitor):
                     else:
                         parametro = False 
                 if parametro:
-                    condition[pos_parametro] = self.memory_parametro[ctx.IDENTIFIER(0).getText()]
+                    condition[pos_parametro] = self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]
         elif iterable_type == set:
             iterable_filtered = set()
             for elemento in iterable:
                 for i in range(len(condition)):
-                    if condition[i] == self.memory_parametro[ctx.IDENTIFIER(0).getText()]:
+                    if condition[i] == self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]:
                         condition[i] = elemento 
                         pos_parametro = i
                         parametro = True 
@@ -189,13 +325,13 @@ class EvalVisitor(PythonFunctionVisitor):
                     else:
                         parametro = False 
                 if parametro:
-                    condition[pos_parametro] =  self.memory_parametro[ctx.IDENTIFIER(0).getText()]
+                    condition[pos_parametro] =  self.memory_parametro_iterable[ctx.IDENTIFIER(0).getText()]
         return iterable_filtered
 
     def visitDef(self, ctx:PythonFunctionParser.DefContext):
         print(ctx.getText())
         id_ = ctx.IDENTIFIER(0).getText()
-        self.memory_parametro[id_] = ctx.IDENTIFIER(1).getText()
+        self.memory_parametro_iterable[id_] = ctx.IDENTIFIER(1).getText()
         global id_actual 
         id_actual = ctx.IDENTIFIER(0).getText()
         value = self.visit(ctx.condition()) 
@@ -227,7 +363,7 @@ class EvalVisitor(PythonFunctionVisitor):
 
     # Visit a parse tree produced by PythonFunctionParser#parameter_condition.
     def visitParameter_condition(self, ctx:PythonFunctionParser.Parameter_conditionContext):
-        if self.memory_parametro[id_actual] == ctx.IDENTIFIER().getText():
+        if self.memory_parametro_iterable[id_actual] == ctx.IDENTIFIER().getText():
             left = ctx.IDENTIFIER().getText()
         else:
             return 0
@@ -249,7 +385,7 @@ class EvalVisitor(PythonFunctionVisitor):
 
     # Visit a parse tree produced by PythonFunctionParser#condition_parameter.
     def visitCondition_parameter(self, ctx:PythonFunctionParser.Condition_parameterContext):
-        if self.memory_parametro[id_actual] == ctx.IDENTIFIER().getText():
+        if self.memory_parametro_iterable[id_actual] == ctx.IDENTIFIER().getText():
             right = ctx.IDENTIFIER().getText()
         else:
             return 0
@@ -267,17 +403,13 @@ class EvalVisitor(PythonFunctionVisitor):
         elif ctx.op.type == PythonFunctionParser.MENORIGUAL:
             operator = '<='
         return [left, right, operator ]
-
-
-
-
+    
     def visitAssign(self, ctx: PythonFunctionParser.AssignContext):
         id_ = ctx.ID().getText()
         value = self.visit(ctx.expr())
         self.memory_iterables[id_] = value
         return value
-
-
+    
     def visitInt(self, ctx: PythonFunctionParser.IntContext):
         return int(ctx.INT().getText())
 

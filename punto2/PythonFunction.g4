@@ -3,17 +3,29 @@ grammar PythonFunction;
 prog:   stat+ ;
 
 stat: function_declaration_filter NEWLINE # creacion_function_fillter
+    |function_declaration_map NEWLINE # creacion_function_fillter
     | iterable_declaration NEWLINE  # print_stat
     | ID '=' expr NEWLINE         # assign
-    | IDENTIFIER '=' filter NEWLINE    #assign_filter          
+    | IDENTIFIER '=' filter NEWLINE    #assign_filter 
+    | IDENTIFIER '=' map NEWLINE    #assign_map            
     ;
+function_declaration_map: 'def' IDENTIFIER '('IDENTIFIER'):' NEWLINE INDENT 'return' operation # def_map
+;
+
 function_declaration_filter: 'def' IDENTIFIER '('IDENTIFIER'):' NEWLINE INDENT 'return' condition # def
 ;
 
 filter: 'filter' '(' IDENTIFIER ',' IDENTIFIER ')'     # execute_filter
         ;
 
-condition: expr op=('=='|'>'|'<'|'!='|'>='|'<=') expr      # always_condition
+map: 'map' '(' IDENTIFIER ',' IDENTIFIER ')'     # execute_map
+        ;
+
+operation:IDENTIFIER op=('*'|'/'|'+'|'-') expr                                    # left_operation
+        |expr op=('*'|'/'|'+'|'-') IDENTIFIER                                    # right_operation
+        ;
+
+condition: expr op=('=='|'>'|'<'|'!='|'>='|'<=') expr       # always_condition
         |IDENTIFIER op=('=='|'>'|'<'|'!='|'>='|'<=') expr   # parameter_condition
         |expr op=('=='|'>'|'<'|'!='|'>='|'<=') IDENTIFIER   # condition_parameter
         ;

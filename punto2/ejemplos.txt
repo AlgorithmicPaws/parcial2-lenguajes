@@ -4,6 +4,11 @@ numbers3 = ()
 numbers4 = (4, 5, 6)
 numbers5 = {}
 numbers6 = {4, 5, 6}
-def por2 (elemento):
+def por2 (a):
+    return a * 2
+lista_aumentada = map(por2,numbers2)
+def solo5 (elemento):
     return  5 == elemento
-lista_filtrada = filter(por2,numbers6)
+lista_filtrada = filter(solo5,numbers6)
+
+

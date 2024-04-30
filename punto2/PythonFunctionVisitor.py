@@ -34,6 +34,16 @@ class PythonFunctionVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by PythonFunctionParser#assign_map.
+    def visitAssign_map(self, ctx:PythonFunctionParser.Assign_mapContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonFunctionParser#def_map.
+    def visitDef_map(self, ctx:PythonFunctionParser.Def_mapContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by PythonFunctionParser#def.
     def visitDef(self, ctx:PythonFunctionParser.DefContext):
         return self.visitChildren(ctx)
@@ -41,6 +51,21 @@ class PythonFunctionVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by PythonFunctionParser#execute_filter.
     def visitExecute_filter(self, ctx:PythonFunctionParser.Execute_filterContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonFunctionParser#execute_map.
+    def visitExecute_map(self, ctx:PythonFunctionParser.Execute_mapContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonFunctionParser#left_operation.
+    def visitLeft_operation(self, ctx:PythonFunctionParser.Left_operationContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonFunctionParser#right_operation.
+    def visitRight_operation(self, ctx:PythonFunctionParser.Right_operationContext):
         return self.visitChildren(ctx)
 
 

@@ -27,7 +27,7 @@ Recomendaciones Punto #1: El programa maneja los numeros imaginarios como: los n
 
 * Para el Punto #2. el archivo .g4 se llama: `PythonFunction.g4`
 
-Recomendaciones Punto #2: Hasta este momento solo recibe iterables (listas, tuplas y sets, que solo contienen numeros enteros) y se puede hacer filtros con condiciones simples como `elemento_iterable == 3` y mapeos con operaciones siples como `elemento_iterable + 2`.
+Recomendaciones Punto #2: Hasta este momento solo recibe iterables (listas, tuplas y sets, que solo contienen numeros enteros) y se puede hacer filtros con condiciones simples como `elemento_iterable == 3`, `elemento_iterable >= 15` entre otras siguiendo una extructura de ` elemento_iterable operador_logico expresión_matemática`y mapeos con operaciones simples como `elemento_iterable + 2` y otras que sigan la estructura `elemento_operable (+,-,*,/) expecion_matematica` .
 
 * Para el punto #3. el archivo .g4 se llama: `FourierTransform.g4`
 
